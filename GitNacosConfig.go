@@ -106,8 +106,7 @@ func main() {
 		fmt.Println(err)
 		panic(err)
 	}
-	convertedFileName := convertToFileName(*urlPtr)
-	file, err := os.OpenFile(convertedFileName+"output.txt", os.O_CREATE|os.O_WRONLY, 0644)
+	file, err := os.OpenFile("output.txt", os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		fmt.Println(err)
 		panic(err)
@@ -162,12 +161,4 @@ func main() {
 		}
 	}
 	fmt.Println("output ok")
-}
-
-func convertToFileName(inputURL string) string {
-	// 替换非法文件名字符
-	convertedFileName := strings.ReplaceAll(inputURL, "://", "_")
-	convertedFileName = strings.ReplaceAll(convertedFileName, ".", "_")
-	convertedFileName = strings.ReplaceAll(convertedFileName, "/", "_")
-	return convertedFileName
 }
